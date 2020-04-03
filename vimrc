@@ -73,6 +73,8 @@ if executable('ctags')
     let g:gutentags_add_default_project_roots = 0
     " Don't tag cmock generated files, or else we'll jump to fake stuff
     let g:gutentags_ctags_exclude = ['build', 'vendor']
+    " 'gd' for go to first tag (matches shortcut for python and omnisharp go-to-definition"
+    autocmd FileType c nnoremap <silent> gd <c-]>
 endif
 " Ultisnips snippets
 " need the expand trigger to be different than the asyncomplete trigger to avoid conflicts
