@@ -122,17 +122,6 @@ alias gpop='git stash pop'
 alias gstash='git stash'
 gitshort gl log
 
-#custom git grep
-# gg() {
-#     if [ -z "$1" ] && [ -z "$2" ]; then
-#         echo "No argument supplied"
-#     elif [ -z "$2" ]; then
-#         grep -nR --exclude-dir=project --exclude-dir=build --exclude=tags --color=always "$1" ./
-#     else
-#         grep -nR --exclude-dir=project --exclude-dir=build --exclude=tags --color=always "$1" "$2"
-#     fi
-#
-# }
 # installed 'ripgrep' and it's super dope, aliasing it because I'm used to gg
 alias gg='rg'
 

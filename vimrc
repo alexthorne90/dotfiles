@@ -95,18 +95,6 @@ imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr>    pumvisible() ? "\<C-cr>" : "\<cr>"
 imap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
-" if you don't want the popup automatically
-"let g:asyncomplete_auto_popup = 0
-"function! s:check_back_space() abort
-"    let col = col('.') - 1
-"    return !col || getline('.')[col - 1]  =~ '\s'
-"endfunction
-"inoremap <silent><expr> <tab>
-"  \ pumvisible() ? "\<C-n>" :
-"  \ <SID>check_back_space() ? "\<tab>" :
-"  \ asyncomplete#force_refresh()
-"inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 
 " LSP - language server protocol - server setup
 " Python - via the LSP pyls
