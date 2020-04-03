@@ -5,7 +5,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 #Environment variables
-export EDITOR=vim
+export EDITOR=gvim
 export VISUAL=$EDITOR
 export PAGER=less
 export CVS_RSH=ssh
@@ -59,7 +59,7 @@ alias biomeme='cd ~/GithubCode/biomeme'
 alias gv='gvim &'
 alias dev='git checkout development;git fetch'
 alias master='git checkout master;git fetch'
-alias v='vim'
+alias v='gvim &'
 
 # dotnet autocompletion
 alias dn='dotnet'
@@ -126,8 +126,8 @@ gitshort gl log
 alias gg='rg'
 
 # Vim
-alias vi='vim'
-alias vim='vim'
+alias vi='gvim &'
+alias vim='gvim &'
 
 # Ceedling
 alias rta='rake clean test:all'
@@ -236,9 +236,9 @@ pull-phone-logs() {
   adb pull sdcard/Android/data/com.biomeme.three9go/files/ERROR_LOG.txt $errorLog
 }
 alias tags='ctags -R --exclude=build --exclude=driver/build --exclude=common/build'
-alias d='cd ~/GithubCode/biomeme/detector'
-alias h='cd ~/GithubCode/biomeme/heater'
-alias b='cd ~/GithubCode/biomeme/baseboard'
+alias d='cd ~/githubcode/detector'
+alias h='cd ~/githubcode/heater'
+alias b='cd ~/githubcode/baseboard'
 alias pi='pipenv install --dev; pipenv shell'
 # biomeme environment vars
 bio-dev-mode() {
