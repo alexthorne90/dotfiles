@@ -1,3 +1,5 @@
+set pythonthreedll=python37.dll
+
 "" Set leader key early in rc
 let mapleader=","
 
