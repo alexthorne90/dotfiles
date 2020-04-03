@@ -71,6 +71,8 @@ if executable('ctags')
     " Don't add the defaults, otherwise it does all .git directories and
     " screws up our submodules
     let g:gutentags_add_default_project_roots = 0
+    " Don't tag cmock generated files, or else we'll jump to fake stuff
+    let g:gutentags_ctags_exclude = ['build', 'vendor']
 endif
 " Ultisnips snippets
 " need the expand trigger to be different than the asyncomplete trigger to avoid conflicts
