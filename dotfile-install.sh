@@ -10,11 +10,11 @@ while true; do
 done
 
 echo "Setting bash profile..."
-cp .bash_profile ~/.bash_profile
+cp bash_profile ~/.bash_profile
 source ~/.bash_profile
 
 echo "Setting vimrc..."
-cp .vimrc ~/.vimrc
+cp vimrc ~/.vimrc
 source ~/.vimrc
 
 echo "Copying vim snippets..."
