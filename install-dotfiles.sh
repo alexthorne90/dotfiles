@@ -34,7 +34,12 @@ echo "Linking .bash_profile"
 ln -s "$dirname"/bash_profile ~/.bash_profile
 source ~/.bash_profile
 
-# copy snippets
+# link snippets
 echo "Copying vim snippets..."
 mkdir -p ~/.vim/ultisnips
-cp vim/ultisnips/* ~/.vim/ultisnips/.
+SNIPPET_FILES="$dirname"/vim/ultisnips/*
+for file in $SNIPPET_FILES
+do
+    echo "Linking snippet file: $file"
+    ln -s "$file" ~/.vim/ultisnips
+done
