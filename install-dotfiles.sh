@@ -37,6 +37,7 @@ source ~/.bash_profile
 # link snippets
 echo "Copying vim snippets..."
 mkdir -p ~/.vim/ultisnips
+rm ~/.vim/ultisnips/*
 SNIPPET_FILES="$dirname"/vim/ultisnips/*
 for file in $SNIPPET_FILES
 do

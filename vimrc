@@ -77,6 +77,8 @@ if executable('ctags')
     autocmd FileType c nnoremap <silent> gd <c-]>
 endif
 " Ultisnips snippets
+" Ensure snippets are in the same place across platforms
+let g:UltiSnipsSnippetDirectories = ['~/.vim/ultisnips']
 " need the expand trigger to be different than the asyncomplete trigger to avoid conflicts
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
