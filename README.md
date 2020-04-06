@@ -4,6 +4,11 @@
 
 * `./install-dotfiles.sh`
   * This copies your current dotfiles into backups (with dates) and then symlinks and sources the repo files to your $HOME
+* It doesn't work on windows...  This is super annoying but it looks like running `ln -s` in bash on windows just copies the file.  The link doesn't work.  Here's how to make a link in windows
+  * Enter command prompt (cmd.exe) as a admin
+  * `mklink C:\Users\Alex\.bashrc C:\Users\Alex\githubcode\dotfiles\bashrc`
+    * This is the windows command for sym link.  Notice that the order is backward
+  * I have not tried to script this yet, so for now you just have to link the files manually.
 
 ## The Tools
 
