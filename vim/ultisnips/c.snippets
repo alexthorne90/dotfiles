@@ -149,4 +149,11 @@ snippet = "Variable assignment" i
 ${1:varname} = ${2:value};$0
 endsnippet
 
+snippet test "Ceedling unit test"
+void test_${1:Function}_${2:TestDescription}(void)
+{
+	$0
+}
+endsnippet
+
 # vim:ft=snippets:
