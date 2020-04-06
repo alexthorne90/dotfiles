@@ -99,6 +99,13 @@ if (${1:/* condition */})
 }
 endsnippet
 
+snippet else "else .."
+else (${1:/* condition */})
+{
+	${0:/* code */}
+}
+endsnippet
+
 snippet printf "printf .. (printf)"
 printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
