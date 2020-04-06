@@ -37,4 +37,4 @@ source ~/.bash_profile
 # copy snippets
 echo "Copying vim snippets..."
 mkdir -p ~/.vim/ultisnips
-cp .vim/ultisnips/* ~/.vim/ultisnips/.
+cp vim/ultisnips/* ~/.vim/ultisnips/.
