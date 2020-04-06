@@ -42,7 +42,7 @@ HISTFILESIZE=10000000
 # only append the history at the end (shouldn't actually be needed - histappend)
 shopt -s histappend
 
-alias ll="ls -lahG"
+alias ll="ls -lahG --color"
 alias l=ll
 alias f='find . -name'
 
