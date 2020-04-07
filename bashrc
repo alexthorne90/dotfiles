@@ -127,7 +127,6 @@ alias gg='rg'
 
 # Vim
 alias vi='gvim &'
-alias vim='gvim &'
 
 # Ceedling
 alias rta='rake clean test:all'
