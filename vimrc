@@ -34,6 +34,11 @@ if executable('ctags')
     Plug 'prabirshrestha/asyncomplete-tags.vim'
     Plug 'ludovicchabant/vim-gutentags'
 endif
+if executable('cargo')
+    Plug 'tsufeki/asyncomplete-fuzzy-match', {
+                \ 'do': 'cargo build --release',
+                \ }
+endif
 call plug#end()
 
 
@@ -41,7 +46,7 @@ call plug#end()
 "" Set logging files for debugging this
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 "
 "" async language servers and sources
 " Buffer - max size currently set at 5M
@@ -62,7 +67,7 @@ if executable('ctags')
                 \ 'whitelist': ['c'],
                 \ 'completor': function('asyncomplete#sources#tags#completor'),
                 \ 'config': {
-                \    'max_file_size': 5000000,
+                \    'max_file_size': 50000000,
                 \  },
                 \ }))
     " Gutentags project root directory has a file named 'configure.bat' (all

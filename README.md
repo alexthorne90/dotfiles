@@ -20,6 +20,10 @@
   - These are powerful fuzzy-finder tools which will be automatically installed by the `PlugInstall` command.  Note that this will take over in your bash shell as well for commands like `c-R` (you want this, it's better)
   - bat : https://github.com/sharkdp/bat
     - A nicer `cat` which fzf uses in the background
+- Asyncomplete : https://github.com/prabirshrestha/asyncomplete.vim
+  - Asychronous autocomplete.  A lot of the tools in here are based on this.  Sources can be added to it's background task to feed into the completion list.  You'll see a lot of the vim plugins are "async-xxx" becasue they are used in this manner.
+  - Fuzzy completion for asyncomplete : https://github.com/tsufeki/asyncomplete-fuzzy-match
+    - This is an addon to the asyncomplete plugin that allows fuzzy matching.  It is a RUST app, so you'll need to have rust installed and the `cargo` command available in your path.  If you do, when running the `PlugInstall` it will automatically build and install the rust app for you.
 - CTags : http://ctags.sourceforge.net/
   - Some of my vim plugins/commands rely on having the `ctags` command, which is a useful tagging tool (especially useful for C project).  Once you have this command executable in your path, run the `PlugInstall` command again to install these plugins.
 - PyLS : Python Language Server : https://pypi.org/project/pyls/
