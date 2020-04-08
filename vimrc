@@ -33,12 +33,14 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 if executable('ctags')
     Plug 'prabirshrestha/asyncomplete-tags.vim'
     Plug 'ludovicchabant/vim-gutentags'
+    Plug 'majutsushi/tagbar'
 endif
 if executable('cargo')
     Plug 'tsufeki/asyncomplete-fuzzy-match', {
                 \ 'do': 'cargo build --release',
                 \ }
 endif
+
 call plug#end()
 
 
@@ -80,6 +82,8 @@ if executable('ctags')
     let g:gutentags_ctags_exclude = ['build', 'vendor']
     " 'gd' for go to first tag (matches shortcut for python and omnisharp go-to-definition"
     autocmd FileType c nnoremap <silent> gd <c-]>
+    " Tagbar toggle
+    nmap <silent> <c-t> :TagbarToggle<cr>
 endif
 " Ultisnips snippets
 " Ensure snippets are in the same place across platforms
@@ -249,7 +253,7 @@ let g:ale_lint_on_text_changed = 'never'
 
 "" PLUGIN - NERDTree
 " ctrl-n opens the tree
-map <c-n> :NERDTreeToggle<cr>
+map <silent> <c-n> :NERDTreeToggle<cr>
 
 
 "" PLUGIN - fzf
