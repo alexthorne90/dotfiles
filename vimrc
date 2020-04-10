@@ -401,9 +401,9 @@ colorscheme apprentice
 augroup custom_filetypes
     autocmd!
     "" Treat .config files like XML
-    au BufNewFile, BufRead *.config set filetype=xml
+    au BufNewFile,BufRead *.config set filetype=xml
     "" Treat .h files as .c (default is .cpp)
-    au BufNewFile, BufRead *.h set filetype=c
+    au BufNewFile,BufRead *.h set filetype=c
 augroup END
 
 " Close the help window (this can apply to alot of other things too, but omni is where I'm using it now)
