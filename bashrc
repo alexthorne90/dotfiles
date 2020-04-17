@@ -177,8 +177,20 @@ prompt() {
   local no_color='\[\033[0m\]'
 
   local time="${YELLOW}\d \@$no_color"
-  local whoami="${GREEN}\u@\h$no_color"
+  local whoami="${GREEN}\u$no_color"
+  #local whoami="${GREEN}\u@\h$no_color"   This one has the computer name (alex@macbook)
   local dir="${CYAN}\w$no_color"
+
+  local joblist
+  jobs=$(jobs)
+  for item in $jobs
+  do
+      str=$item
+      joblist=$joblist${str:0:3}" "
+  done
+  # each line of "jobs" output has 3 parts ("
+  # first 3 characters of each part of the job list (ex: "[1] Sto vim")
+  joblist=$BLUE$joblist
 
   local branch
   if git rev-parse --git-dir >/dev/null 2>/dev/null ; then
@@ -188,13 +200,6 @@ prompt() {
     unset branch
   fi
 
-  local driver
-  if test -n "$M_DRIVER" ; then
-    driver="$LIGHT_BLUE($M_DRIVER)"
-  else
-    driver="${RED}NO DRIVER"
-  fi
-
   local last_fail
   if test $last_status -ne 0 ; then
     last_fail="=> ${YELLOW}Err: $last_status${no_color}\n"
@@ -202,7 +207,7 @@ prompt() {
     unset last_fail
   fi
 
-  PS1="\n$time $whoami $branch$dir\n$last_fail$no_color\$ "
+  PS1="\n$time $whoami $branch$dir $joblist\n$last_fail$no_color\$ "
 }
 PROMPT_COMMAND=prompt
 # retain $PROMPT_DIRTRIM directory components when the prompt is too long
