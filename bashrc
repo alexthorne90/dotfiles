@@ -59,7 +59,13 @@ alias biomeme='cd ~/GithubCode/biomeme'
 alias gv='gvim &'
 alias dev='git checkout development;git fetch'
 alias master='git checkout master;git fetch'
-alias v='gvim &'
+v() {
+    if [ -z "$1" ]; then
+        gvim &
+    else
+        gvim "$1" &
+    fi
+}
 
 # dotnet autocompletion
 alias dn='dotnet'
