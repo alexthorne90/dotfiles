@@ -237,6 +237,7 @@ let g:ale_fixers = {
             \   'python': ['autopep8'],
             \   'javascript': ['prettier'],
             \   'typescript': ['prettier'],
+            \   'c': ['clang-format'],
             \}
 nmap <silent> <C-u> <Plug>(ale_next_wrap)
 nmap <silent> <S-u> <Plug>(ale_previous_wrap)
@@ -249,6 +250,10 @@ let g:ale_open_list = 1
 " do the linting less often (will now only be on save)
 let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
+augroup ale_setup
+    " only autofixing c files for now, this might annoy me
+    autocmd FileType c let g:ale_fix_on_save = 1
+augroup end
 
 
 "" PLUGIN - NERDTree

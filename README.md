@@ -37,6 +37,7 @@
     - pyls : `pip install pyls`
     - Omnisharp : will be installed through your vim plugins
     - eslint : https://www.npmjs.com/package/eslint
+    - clang-format : https://clang.llvm.org/docs/ClangFormat.html
 - Testing
   - Using vim-test plugin to automatically determine how to run unit tests based on the file type.  These are then dependent on having that test runner available (`pytest` for example).
   - Ceedling : http://www.throwtheswitch.org/ceedling.  Using the Ruby gem for C testing (this overrides the vim-test settings).  `ceedling` command must be available in path for this: `gem install ceedling`.
