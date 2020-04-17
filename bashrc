@@ -107,6 +107,7 @@ alias gca='git commit --amend'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glv='git lg'
 git-set-user() {
+    git config --global user.name "Alex Thorne"
     git config --global user.email $1
     echo "Set git user info to:"
     echo "$(git config user.name)"
