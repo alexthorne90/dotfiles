@@ -7,8 +7,8 @@ Language:        Cpp
 # BasedOnStyle:  LLVM
 AlignAfterOpenBracket: DontAlign
 AlignConsecutiveMacros: true
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Left
 AlignOperands:   true
 AlignTrailingComments: true

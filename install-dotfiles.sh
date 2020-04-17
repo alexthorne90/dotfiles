@@ -44,3 +44,7 @@ do
     echo "Linking snippet file: $file"
     ln -s "$file" ~/.vim/ultisnips
 done
+
+# link .clang-format in HOME
+echo "Linking .clang-format"
+ln -s "$dirname"/clang-format-alex-C ~/.clang-format
