@@ -444,6 +444,7 @@ nmap <Leader>pc :pc<CR>
 "" Default window size for gvim
 if has("gui_running")
     set lines=50 columns=195
+    set guifont=Hack:h8
 endif
 
 "" most of my coding standards right now are 120 (which I think is reasonable)
