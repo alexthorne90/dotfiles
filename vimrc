@@ -40,6 +40,8 @@ if executable('cargo')
                 \ 'do': 'cargo build --release',
                 \ }
 endif
+Plug 'runoshun/tscompletejob'
+Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
 
 call plug#end()
 
@@ -116,6 +118,12 @@ if executable('pyls')
                 \ 'cmd': {server_info->['pyls']},
                 \ 'whitelist': ['python'],
                 \ })
+" Not sure why isn't registered like a server, but it is a server
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tscompletejob#get_source_options({
+    \ 'name': 'tscompletejob',
+    \ 'whitelist': ['typescript'],
+    \ 'completor': function('asyncomplete#sources#tscompletejob#completor'),
+    \ }))
 endif
 
 function! s:on_lsp_buffer_enabled() abort
@@ -251,6 +259,8 @@ let g:ale_open_list = 1
 let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
 augroup ale_setup
+    " autofix .js and .ts with prettier
+    autocmd FileType javascript,typescript let g:ale_fix_on_save = 1
     " only autofixing c files for now, this might annoy me
     autocmd FileType c let g:ale_fix_on_save = 1
 augroup end
