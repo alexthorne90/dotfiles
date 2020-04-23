@@ -259,6 +259,7 @@ let g:ale_open_list = 1
 let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
 augroup ale_setup
+    au!
     " autofix .js and .ts with prettier
     autocmd FileType javascript,typescript let g:ale_fix_on_save = 1
     " only autofixing c files for now, this might annoy me
@@ -395,16 +396,23 @@ imap <c-l> <c-x><c-l>
 
 "" Folding
 set foldnestmax=2
-" c sharp (c#, cs), c
+" custom folding for all different languages
 augroup custom_folding
     autocmd!
+    " c and cs
     au FileType cs,c set omnifunc=syntaxcomplete#Complete
     au FileType cs,c set foldmethod=marker
-    au FileType python set foldmethod=indent
     au FileType cs,c set foldmarker={,}
     au FileType cs,c set foldtext=substitute(getline(v:foldstart),'{.*','{...}',)
     au FileType cs set foldlevelstart=2
     au FileType c set foldlevelstart=0
+    " python
+    au FileType python set foldmethod=indent
+    " js and ts
+    au FileType javascript,typescript set foldmethod=syntax
+    au FileType javascript,typescript set foldcolumn=1
+    au FileType javascript,typescript let javaScript_fold=1
+    au FileType javascript,typescript set foldlevelstart=1
 augroup END
 " space toggles fold in current area
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
