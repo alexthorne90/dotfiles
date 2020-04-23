@@ -1,0 +1,18 @@
+#######################################################################
+#                Javascript# Snippets for UltiSnips                   #
+#######################################################################
+
+priority -50
+
+snippet describe "Jest describe block"
+describe("${1:Description}", () => {
+  $0
+});
+endsnippet
+
+snippet test "Jest test"
+test("${1:Test description}", done => {
+  $0
+  done();
+});
+endsnippet
