@@ -1,10 +1,8 @@
-# This is my preferred C styleguide using clang-format
-# To use this, copy this file and name it ".clang-format" in your project root
-# The vimrc is setup to have ALE use this for fixing C files
+# This is the Biomeme preferred C styleguide v1.0 using clang-format
+# Alex Thorne - 2020-05-19
 
 ---
 Language:        Cpp
-# BasedOnStyle:  LLVM
 AlignAfterOpenBracket: DontAlign
 AlignConsecutiveMacros: true
 AlignConsecutiveAssignments: true
