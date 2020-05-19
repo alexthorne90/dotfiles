@@ -436,3 +436,7 @@ nmap <Leader>pc :pc<CR>
 if has("gui_running")
     set lines=50 columns=195
 endif
+
+"" most of my coding standards right now are 120 (which I think is reasonable)
+"" this could be updated per-language in the future
+set colorcolumn=120
