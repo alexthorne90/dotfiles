@@ -444,5 +444,5 @@ set colorcolumn=120
 augroup json_pretty
     autocmd!
     "" Sweet command to format json from in a vim pane
-    nnoremap json :%!python -m json.tool<cr>
+    nnoremap <Leader>json :%!python -m json.tool<cr>
 augroup END
