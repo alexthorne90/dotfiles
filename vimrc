@@ -203,10 +203,6 @@ augroup omnisharp_commands
     autocmd FileType cs inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
 			    \ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
 
-    " run tests
-    autocmd FileType cs nnoremap<buffer> <Leader>t :OmniSharpRunTest<cr>
-    autocmd FileType cs nnoremap<buffer> <Leader>a :OmniSharpRunTestsInFile<cr>
-
     " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
     autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
     " Run code actions with text selected in visual mode to extract method
@@ -301,6 +297,7 @@ augroup END
 
 "" PLUGIN - vim-test
 let test#python#runner = 'pytest'
+let test#csharp#runner = 'dotnettest'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>a :TestFile<CR>
 
