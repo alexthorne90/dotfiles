@@ -446,3 +446,9 @@ augroup json_pretty
     "" Sweet command to format json from in a vim pane
     nnoremap <Leader>json :%!python -m json.tool<cr>
 augroup END
+
+" Autosave - experimenting with this, might be really annoying
+augroup autosave
+    autocmd!
+    autocmd TextChanged,TextChangedI <buffer> silent write
+augroup END
