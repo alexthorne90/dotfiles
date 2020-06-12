@@ -11,8 +11,14 @@ describe("${1:Description}", () => {
 endsnippet
 
 snippet test "Jest test"
+test("${1:Test description}", () => {
+  ${0:pass;}
+});
+endsnippet
+
+snippet atest "Jest async test"
 test("${1:Test description}", done => {
-  $0
+  ${0:pass;}
   done();
 });
 endsnippet
