@@ -66,6 +66,7 @@ v() {
         gvim "$1" &
     fi
 }
+alias fg='echo "Windows - alt tab to your gvim"'
 
 # dotnet autocompletion
 alias dn='dotnet'
