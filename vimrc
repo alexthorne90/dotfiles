@@ -221,6 +221,10 @@ augroup omnisharp_commands
     autocmd FileType cs nnoremap <Leader>sp :OmniSharpStopServer<CR>
     autocmd FileType cs nnoremap <Leader>sr :OmniSharpRestartServer<CR>
 
+    " run tests - going to use vim-test for singles, and omni for full file so that I can jump in the quickfix window
+    "autocmd FileType cs nnoremap<buffer> <Leader>t :OmniSharpRunTest<cr>
+    autocmd FileType cs nnoremap<buffer> <Leader>a :OmniSharpRunTestsInFile<cr>
+
     " Enable snippet completion
     let g:OmniSharp_want_snippet=1
 augroup END
