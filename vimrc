@@ -339,6 +339,13 @@ augroup END
 " remap redo to shift-r (from ctrl-r) so that ctrl-r can be fzf history
 nnoremap <S-r> :redo<cr>
 
+" Increment highlighted list of numbers
+vnoremap <leader>inc g<c-a>
+" Turn highlighted text to all upper case
+vnoremap <leader>up gmU
+" Turn highlighted text to all lower case
+vnoremap <leader>low gmu
+
 " Delete buffer with leader
 nnoremap <Leader>b :bd<CR>
 " Escape with jk mashing
