@@ -17,6 +17,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
+Plug 'vim-scripts/DoxygenToolkit.vim'
+
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-unimpaired'
@@ -313,6 +315,13 @@ augroup END
 function! RunCeedlingTest()
   :!ceedling clean test:%:t
 endfunction
+
+"" DoxygenToolkit
+augroup doxygen_shortcut
+    autocmd!
+    autocmd FileType c nnoremap <Leader>d :Dox<CR>
+augroup END
+
 
 
 
