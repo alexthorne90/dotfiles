@@ -45,6 +45,14 @@ endif
 Plug 'runoshun/tscompletejob'
 Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
 
+" JS/TS development
+Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'jparise/vim-graphql'        " GraphQL syntax
+
+Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }     " using coc for ts lsp
+
 call plug#end()
 
 
@@ -232,20 +240,16 @@ augroup END
 
 
 "" PLUGIN - ALE
-" my enabled linters
+" my enabled linters (using Coc now for javascript/typescript)
 let g:ale_linters = {
             \   'python': ['flake8', 'pyls'],
             \   'c': [],
             \   'cpp': [],
             \   'cs': ['OmniSharp'],
-            \   'javascript': ['eslint'],
-            \   'typescript': ['eslint'],
             \}
-" my enabled fixers
+" my enabled fixers (using Coc now for javascript/typescript)
 let g:ale_fixers = {
             \   'python': ['autopep8'],
-            \   'javascript': ['prettier'],
-            \   'typescript': ['prettier'],
             \   'c': ['clang-format'],
             \}
 nmap <silent> <C-u> <Plug>(ale_next_wrap)
@@ -322,6 +326,35 @@ augroup doxygen_shortcut
     autocmd FileType c nnoremap <Leader>d :Dox<CR>
 augroup END
 
+
+
+"" PLUGIN - coc and friends
+let g:coc_global_extensions = [ 'coc-tsserver' ]    " use tsserver for typescript lsp
+let g:coc_global_extensions += ['coc-prettier']
+let g:coc_global_extensions += ['coc-eslint']
+
+augroup tsserver_commands
+    autocmd!
+    "" Note that I'm purposely overriding some ALE commands here
+
+    " leader space for code action
+    autocmd FileType javascript,typescript nmap <silent> <Leader><Space> <Plug>(coc-codeaction)
+    " leader fx for fix
+    autocmd FileType javascript,typescript nmap <silent> <Leader>fx <Plug>(coc-fix-current)
+    " GoTo code navigation.
+    autocmd Filetype javascript,typescript nmap <silent> gd <Plug>(coc-definition)
+    autocmd Filetype javascript,typescript nmap <silent> gy <Plug>(coc-type-definition)
+    autocmd Filetype javascript,typescript nmap <silent> gi <Plug>(coc-implementation)
+    autocmd Filetype javascript,typescript nmap <silent> gr <Plug>(coc-references)
+
+    autocmd Filetype javascript,typescript nmap <silent> <C-u> <Plug>(coc-diagnostic-next)
+    autocmd Filetype javascript,typescript nmap <silent> <S-u> <Plug>(coc-diagnostic-prev)
+    autocmd Filetype javascript,typescript nmap <silent> <Leader>rn <Plug>(coc-rename)
+
+    "" and here's a repo with other coc example stuff
+    " https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+augroup END
 
 
 
