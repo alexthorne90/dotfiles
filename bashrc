@@ -49,13 +49,8 @@ alias f='find . -name'
 # Athorne custom
 alias desk='cd ~/Desktop'
 alias dls='cd ~/Downloads'
-alias info='open ~/Desktop/Me/info.rtf'
 alias readelf='greadelf'
-alias msc='app msc_robot_arm'
-alias d2se='wine ~/.wine/drive_c/users/alexanderthorne/Desktop/Windows/Diablo\ II\ wMods/D2SE.exe'
-alias coursera='cd ~/GithubCode/coursera_projects'
 alias ntab='open . -a iterm'
-alias biomeme='cd ~/GithubCode/biomeme'
 alias gv='gvim &'
 alias dev='git checkout development;git fetch'
 alias master='git checkout master;git fetch'
@@ -240,34 +235,6 @@ alias d='cd ~/GithubCode/biomeme/detector'
 alias h='cd ~/GithubCode/biomeme/heater'
 alias b='cd ~/GithubCode/biomeme/baseboard'
 alias pi='pipenv install --dev; pipenv shell'
-# biomeme environment vars
-bio-dev-mode() {
-  export BIO_AWS_COGNITO_ARN='arn:aws:cognito-idp:us-east-1:713356646941:userpool/us-east-1_s4IpPbjrc'
-  export BIO_COGNITO_POOL_ID='us-east-1_s4IpPbjrc'
-  export BIO_COGNITO_CLIENT_ID='7t2ue2hqnfplg3377upmjk3sur'
-  export BIO_BASE_URL="https://dev-api.biomeme.com/"
-  export BIO_USER_ID="738b87a8-f8ae-4986-b710-f93a8d97f025"
-  export BIO_TEST_USER="sam@biomeme.com"
-  export BIO_TEST_USER_PASSWORD="Biomeme1234!"
-  export BIO_USER_ID="sam@biomeme.com"
-  export REPORT_BACKEND_URL="https://dev-api.biomeme.com/reporting"
-  export REPORT_SITE_STAGE="dev"
-  export BIO_WEB_API_NAME="BiomemeAPIGatewayDev"
-  export BIO_HOTJAR_ID='1020341'
-}
-bio-dev-mode        # auto call it so I don't have to remember to
-
-bio-qc-mode() {
-  export BIO_ALGORITHM_BACKEND_URL='7kvqeghm2h.execute-api.us-east-1.amazonaws.com/dev'
-  export TEAM_ID='A09697D4-A14F-4E86-A887-98C13A7AC141'
-  export USER_POOL_ID='us-east-1_kSHSOVltn'
-  export CLIENT_ID='1sscv0gqs2rfpeql9k3tk9brc6'
-  export USER_POOL_REGION='us-east-1'
-  export PRODUCTION_HOST='https://api.biomeme.com'
-  export RESULTS_OUTPUT=$HOME/"Dropbox (Biomeme)/Biomeme_QC/Hardware/Franklin/"
-  export CLOUD_USERNAME='heidi@biomeme.com'
-  export CLOUD_PASSWORD='Bpc2012!'
-}
 
 clean-git() {
     git branch --merged | egrep -v "(^\*|master|development)" | xargs git branch -d
