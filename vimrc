@@ -22,6 +22,8 @@ Plug 'rafi/awesome-vim-colorschemes'
 
 Plug 'vim-scripts/DoxygenToolkit.vim'
 
+Plug 'rhysd/vim-clang-format'
+
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'tpope/vim-unimpaired'
 
@@ -172,64 +174,6 @@ augroup omnisharp_commands
 augroup END
 
 
-"" PLUGIN - NERDTree
-" ctrl-n opens the tree
-map <silent> <c-n> :NERDTreeToggle<cr>
-
-
-"" PLUGIN - fzf
-" add Fzf namespace to all commands
-let g:fzf_command_prefix = 'Fzf'
-" ctrl-p for fzf files (just like old ctrl-p plugin)
-nnoremap <silent> <c-p> :FzfFiles<cr>
-" and using ctrl-g for only file in current Git repo
-nnoremap <silent> <c-g> :FzfGFiles<cr>
-" ctrl f for History, give recent files
-nnoremap <silent> <c-f> :FzfHistory<cr>
-" <leader>gg for ripgrep (rg) grep of project
-nnoremap <silent> <leader>gg :FzfRg<Space>
-" <leader>gl for git log (Commits is the command)
-nnoremap <silent> <leader>gl :FzfCommits<cr>
-" <leader>gl for git log only of file in buffer (BCommits is the command)
-nnoremap <silent> <leader>glb :FzfBCommits<cr>
-" <ctrl-r> for history of commands ran in vim (like terminal ctrl-r)
-nnoremap <silent> <c-r> :FzfHistory:<cr>
-
-" Clean up fzf statusline
-augroup fzf
-    autocmd!
-    autocmd! FileType fzf
-    autocmd  FileType fzf set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-augroup END
-
-
-"" PLUGIN - vim-test
-let test#strategy = "vimterminal"
-let test#python#runner = 'pytest'
-let test#csharp#runner = 'dotnettest'
-let test#javascript#jest#executable = 'yarn test'
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>a :TestFile<CR>
-
-"" testing
-augroup ceedling_testing_override
-    autocmd!
-    autocmd FileType c nnoremap <Leader>t :call RunCeedlingTest()<CR>
-augroup END
-
-function! RunCeedlingTest()
-  :!ceedling clean test:%:t
-endfunction
-
-"" DoxygenToolkit
-augroup doxygen_shortcut
-    autocmd!
-    autocmd FileType c nnoremap <Leader>d :Dox<CR>
-augroup END
-
-
-
 "" PLUGIN - coc and friends
 let g:coc_global_extensions = [ 'coc-tsserver' ]    " use tsserver for typescript lsp
 let g:coc_global_extensions += ['coc-prettier']
@@ -285,6 +229,74 @@ augroup coc_commands
 
     "" and here's a repo with other coc example stuff
     " https://github.com/neoclide/coc.nvim#example-vim-configuration
+augroup END
+
+
+"" PLUGIN - vim-test
+let test#strategy = "vimterminal"
+let test#python#runner = 'pytest'
+let test#csharp#runner = 'dotnettest'
+let test#javascript#jest#executable = 'yarn test'
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>a :TestFile<CR>
+
+"" testing
+augroup ceedling_testing_override
+    autocmd!
+    autocmd FileType c nnoremap <Leader>t :call RunCeedlingTest()<CR>
+augroup END
+
+function! RunCeedlingTest()
+  :!ceedling clean test:%:t
+endfunction
+
+
+"" PLUGIN - vim-clang-format
+let g:clang_format#detect_style_file = 1    " detect a .clang-format file (instead of using own options)
+augroup c_file_format_override              " overriding anything that other plugins would do for formatting C files
+    autocmd!
+    autocmd FileType c nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+    autocmd FileType c vnoremap <buffer><Leader>cf :ClangFormat<CR>
+    autocmd FileType c ClangFormatAutoEnable
+augroup END
+
+
+"" PLUGIN - DoxygenToolkit
+augroup doxygen_shortcut
+    autocmd!
+    autocmd FileType c nnoremap <Leader>d :Dox<CR>
+augroup END
+
+
+"" PLUGIN - NERDTree
+" ctrl-n opens the tree
+map <silent> <c-n> :NERDTreeToggle<cr>
+
+
+"" PLUGIN - fzf
+" add Fzf namespace to all commands
+let g:fzf_command_prefix = 'Fzf'
+" ctrl-p for fzf files (just like old ctrl-p plugin)
+nnoremap <silent> <c-p> :FzfFiles<cr>
+" and using ctrl-g for only file in current Git repo
+nnoremap <silent> <c-g> :FzfGFiles<cr>
+" ctrl f for History, give recent files
+nnoremap <silent> <c-f> :FzfHistory<cr>
+" <leader>gg for ripgrep (rg) grep of project
+nnoremap <silent> <leader>gg :FzfRg<Space>
+" <leader>gl for git log (Commits is the command)
+nnoremap <silent> <leader>gl :FzfCommits<cr>
+" <leader>gl for git log only of file in buffer (BCommits is the command)
+nnoremap <silent> <leader>glb :FzfBCommits<cr>
+" <ctrl-r> for history of commands ran in vim (like terminal ctrl-r)
+nnoremap <silent> <c-r> :FzfHistory:<cr>
+
+" Clean up fzf statusline
+augroup fzf
+    autocmd!
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 augroup END
 
 
