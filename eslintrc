@@ -1,0 +1,67 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:cypress/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "parser": "babel-eslint",
+  "globals": {
+    "localStorage": true,
+    "document": true,
+    "window": true
+  },
+  "rules": {
+    "no-bitwise": 0,
+    "func-names": ["error", "never"],
+    "no-underscore-dangle": "off",
+    "prefer-const": "error",
+    "linebreak-style": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-curly-newline": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx"]
+      }
+    ],
+    "react/prop-types": 0,
+    "react-hooks/exhaustive-deps": "warn",
+    "react/button-has-type": 0,
+    "react/no-access-state-in-setstate": 0,
+    "react/no-unescaped-entities": 0,
+    "object-curly-spacing": 2,
+    "curly": ["error", "multi-line"],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never",
+        "imports": "always-multiline",
+        "objects": "always-multiline"
+      }
+    ],
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "import/prefer-default-export": 0,
+    "import/extensions": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
+  "plugins": ["cypress", "react", "react-hooks", "@typescript-eslint"]
+}
