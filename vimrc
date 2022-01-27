@@ -173,12 +173,16 @@ augroup END
 
 "" PLUGIN - coc and friends
 let g:coc_global_extensions = [ 'coc-tsserver' ]    " use tsserver for typescript lsp
-let g:coc_global_extensions += ['coc-prettier']
-let g:coc_global_extensions += ['coc-eslint']
 let g:coc_global_extensions += ['coc-pyright']
 let g:coc_global_extensions += ['coc-ultisnips']
 let g:coc_global_extensions += ['coc-omnisharp']
 let g:coc_global_extensions += ['coc-json']
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+    let g:coc_global_extensions += ['coc-prettier']
+endif
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+    let g:coc_global_extensions += ['coc-eslint']
+endif
 
 set encoding=utf-8
 set hidden
