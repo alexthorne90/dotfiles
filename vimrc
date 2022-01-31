@@ -127,8 +127,7 @@ augroup omnisharp_commands
     autocmd!
 
     " The following commands are contextual, based on the cursor position.
-    autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
-    autocmd FileType cs nnoremap <buffer> <Leader>fi :OmniSharpFindImplementations<CR>
+    " Using CoC for some of these now
     autocmd FileType cs nnoremap <buffer> <Leader>fs :OmniSharpFindSymbol<CR>
     autocmd FileType cs nnoremap <buffer> <Leader>fu :OmniSharpFindUsages<CR>
 
@@ -147,8 +146,6 @@ augroup omnisharp_commands
     autocmd FileType cs inoremap <expr> <Tab> pumvisible() ? '<C-n>' :
 			    \ getline('.')[col('.')-2] =~# '[[:alnum:].-_#$]' ? '<C-x><C-o>' : '<Tab>'
 
-    " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-    autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<CR>
     " Run code actions with text selected in visual mode to extract method
     autocmd FileType cs xnoremap <Leader><Space> :call OmniSharp#actions#codeactions#Get('visual')<CR>
 
@@ -165,8 +162,8 @@ augroup omnisharp_commands
     autocmd FileType cs nnoremap <Leader>sp :OmniSharpStopServer<CR>
     autocmd FileType cs nnoremap <Leader>sr :OmniSharpRestartServer<CR>
 
-    " run tests - going to use vim-test for singles, and omni for full file so that I can jump in the quickfix window
-    "autocmd FileType cs nnoremap<buffer> <Leader>t :OmniSharpRunTest<cr>
+    " run tests
+    autocmd FileType cs nnoremap<buffer> <Leader>t :OmniSharpRunTest<cr>
     autocmd FileType cs nnoremap<buffer> <Leader>a :OmniSharpRunTestsInFile<cr>
 
     " Enable snippet completion
@@ -211,17 +208,17 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 augroup coc_commands
     autocmd!
     " leader space for code action
-    autocmd FileType javascript,typescript,python nmap <silent> <Leader><Space> <Plug>(coc-codeaction)
+    autocmd FileType javascript,typescript,python,cs nmap <silent> <Leader><Space> <Plug>(coc-codeaction)
     " leader fx for fix
     autocmd FileType javascript,typescript,python nmap <silent> <Leader>fx <Plug>(coc-fix-current)
     " GoTo code navigation.
-    autocmd Filetype javascript,typescript,python nmap <silent> gd <Plug>(coc-definition)
+    autocmd Filetype javascript,typescript,python,cs nmap <silent> gd <Plug>(coc-definition)
     autocmd Filetype javascript,typescript,python nmap <silent> gy <Plug>(coc-type-definition)
-    autocmd Filetype javascript,typescript,python nmap <silent> gi <Plug>(coc-implementation)
-    autocmd Filetype javascript,typescript,python nmap <silent> gr <Plug>(coc-references)
+    autocmd Filetype javascript,typescript,python,cs nmap <silent> gi <Plug>(coc-implementation)
+    autocmd Filetype javascript,typescript,python,cs nmap <silent> gr <Plug>(coc-references)
 
-    autocmd Filetype javascript,typescript,python nmap <silent> <C-u> <Plug>(coc-diagnostic-next)
-    autocmd Filetype javascript,typescript,python nmap <silent> <S-u> <Plug>(coc-diagnostic-prev)
+    autocmd Filetype javascript,typescript,python,cs nmap <silent> <C-u> <Plug>(coc-diagnostic-next)
+    autocmd Filetype javascript,typescript,python,cs nmap <silent> <S-u> <Plug>(coc-diagnostic-prev)
     autocmd Filetype javascript,typescript,python nmap <silent> <Leader>rn <Plug>(coc-rename)
 
     autocmd Filetype javascript,typescript,python nmap <Leader>dc :call CocActionAsync('doHover')<CR>
