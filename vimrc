@@ -177,12 +177,17 @@ let g:coc_global_extensions += ['coc-pyright']
 let g:coc_global_extensions += ['coc-ultisnips']
 let g:coc_global_extensions += ['coc-omnisharp']
 let g:coc_global_extensions += ['coc-json']
+let g:coc_global_extensions += ['coc-yaml']
+let g:coc_global_extensions += ['coc-swagger']
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
     let g:coc_global_extensions += ['coc-prettier']
 endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
     let g:coc_global_extensions += ['coc-eslint']
 endif
+
+" shortcut for Swagger rendering
+command -nargs=0 Swagger :CocCommand swagger.render
 
 set encoding=utf-8
 set hidden
