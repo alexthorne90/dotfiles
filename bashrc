@@ -1,11 +1,7 @@
 # Settings for all shells
 
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
 #Environment variables
-export EDITOR=gvim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=less
 export CVS_RSH=ssh
@@ -50,22 +46,17 @@ alias f='find . -name'
 alias desk='cd ~/Desktop'
 alias dls='cd ~/Downloads'
 alias info='open ~/Desktop/Me/info.rtf'
-alias readelf='greadelf'
-alias msc='app msc_robot_arm'
-alias d2se='wine ~/.wine/drive_c/users/alexanderthorne/Desktop/Windows/Diablo\ II\ wMods/D2SE.exe'
-alias coursera='cd ~/githubcode/coursera_projects'
-alias ntab='open . -a iterm'
 alias biomeme='cd ~/githubcode/biomeme'
 alias gv='gvim &'
 alias dev='git checkout development;git fetch'
+alias read='bat README.md'
 v() {
     if [ -z "$1" ]; then
-        gvim &
+        nvim
     else
-        gvim "$1" &
+        nvim "$1"
     fi
 }
-alias fg='echo "Windows - alt tab to your gvim"'
 
 # dotnet autocompletion
 alias dn='dotnet'
@@ -82,9 +73,6 @@ _dotnet_bash_complete()
   COMPREPLY=( $(compgen -W "$completions" -- "$word") )
 }
 complete -f -F _dotnet_bash_complete dn
-
-# git bash completion
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # function to alias git commands with the git completion built in
 gitshort() {
@@ -117,7 +105,7 @@ alias git-personal='git-set-user alexthorne90@gmail.com'
 alias git-biomeme='git-set-user alex@biomeme.com'
 
 # bhaskell git (with my 'gitshort' additions)
-gitshort g git
+alias g='git'
 alias gap='git add -p'
 alias gci='git commit'
 gitshort gco checkout
@@ -145,20 +133,6 @@ alias cc='ceedling clean;ceedling'
 # give me gcc colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-## only binds the given termcap entr(y|ies) to a widget if the terminal supports it
-termcap_bind() {
-  local widget=$1 key termcap
-  shift
-  for termcap ; do
-    key="$(tput $termcap)"
-    [ -n "$key" ] && bind "\"$key\": $widget"
-  done
-}
-
-# Search history
-termcap_bind history-search-backward cuu1 kcuu1
-termcap_bind history-search-forward cud1 kcud1
-
 # Simulate Zsh's preexec hook (see: http://superuser.com/a/175802/73015 )
 # (This performs the histappend at a better time)
 simulate_preexec() {
@@ -168,56 +142,27 @@ simulate_preexec() {
 }
 trap simulate_preexec DEBUG
 
-#command prompt customization
-prompt() {
-  local last_status=$?
-
-  local WHITE="\[\033[1;37m\]"
-  local GREEN="\[\033[0;32m\]"
-  local CYAN="\[\033[0;36m\]"
-  local GRAY="\[\033[0;37m\]"
-  local BLUE="\[\033[0;34m\]"
-  local LIGHT_BLUE="\[\033[1;34m\]"
-  local YELLOW="\[\033[1;33m\]"
-  local RED="\[\033[1;31m\]"
-  local no_color='\[\033[0m\]'
-
-  local time="${YELLOW}\d \@$no_color"
-  local whoami="${GREEN}\u$no_color"
-  #local whoami="${GREEN}\u@\h$no_color"   This one has the computer name (alex@macbook)
-  local dir="${CYAN}\w$no_color"
-
-  local joblist
-  jobs=$(jobs)
-  for item in $jobs
-  do
-      str=$item
-      joblist=$joblist${str:0:3}" "
-  done
-  # each line of "jobs" output has 3 parts ("
-  # first 3 characters of each part of the job list (ex: "[1] Sto vim")
-  joblist=$BLUE$joblist
-
-  local branch
-  if git rev-parse --git-dir >/dev/null 2>/dev/null ; then
-    branch=$(git branch | awk '/^\*/ { print $2 }')
-    branch="${branch:+$LIGHT_BLUE$branch }"
-  else
-    unset branch
-  fi
-
-  local last_fail
-  if test $last_status -ne 0 ; then
-    last_fail="=> ${YELLOW}Err: $last_status${no_color}\n"
-  else
-    unset last_fail
-  fi
-
-  PS1="\n$time $whoami $branch$dir $joblist\n$last_fail$no_color\$ "
+run_command_until_failure() {
+    if [ $# -ne 2 ]
+    then
+        echo "Usage: $0 <command> <max_attempts>"
+        return
+    fi
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    for ((i=1; i <= $2; i++)) do
+        output=$($1)
+        result=$?
+        if [ $result -ne 0 ]
+        then
+            echo -e "${RED}FAILURE on attempt $i"
+            echo $output
+            return
+        else
+            echo -n -e "${GREEN}."
+        fi
+    done
 }
-PROMPT_COMMAND=prompt
-# retain $PROMPT_DIRTRIM directory components when the prompt is too long
-PROMPT_DIRTRIM=3
 
 #biomeme stuff
 alias ports='python -m serial.tools.list_ports'
@@ -246,102 +191,17 @@ alias d='cd ~/githubcode/detector'
 alias h='cd ~/githubcode/heater'
 alias b='cd ~/githubcode/baseboard'
 alias pi='pipenv install --dev; pipenv shell'
+alias po='poetry install; poetry shell'
 
 clean-git() {
     git branch --merged | egrep -v "(^\*|master|development)" | xargs git branch -d
 }
-
-#pdf open shortcuts
-alias l0ref='start "" "/c/Users/alex/biomeme/datasheets/st/L0/STM32L073-reference.pdf"'
-alias l0data='start "" "/c/Users/alex/biomeme/datasheets/st/L0/STM32L073-datasheet.pdf"'
-alias f0ref='start "" "/c/Users/alex/biomeme/datasheets/st/F0/STM32F030-reference-manual.pdf"'
-alias f0data='start "" "/c/Users/alex/biomeme/datasheets/st/F0/STM32F030-datasheet.pdf"'
-alias f4ref='start "" "/c/Users/alex/biomeme/datasheets/st/STM32F446 reference manual.pdf"'
-alias f4data='start "" "/c/Users/alex/biomeme/datasheets/st/STM32F446 datasheet.pdf"'
 
 #random number generation!
 random() {
     local R=$RANDOM$RANDOM
     printf '0x%08X (%u)\r\n' $R $R
 }
-
-
-# big ol IAR build and flash functions
-# add IAR and ST-Link stuff to path
-export PATH=$PATH:/c/Program\ Files\ \(x86\)/STMicroelectronics/STM32\ ST-LINK\ Utility/ST-LINK\ Utility
-export PATH=$PATH:/c/Program\ Files\ \(x86\)/IAR\ Systems/Embedded\ Workbench\ 8.2_2/common/bin
-
-function iard() {
-    ARGC=$#
-    IarBuild.exe $1 -clean Debug
-    if [ $ARGC -eq 1 ]; then
-        IarBuild.exe $1 -build Debug -log all -parallel 4 2>&1 | tee build.log
-    else
-        echo "" | cat > build.log
-        IarBuild.exe $1 -build Debug -log all -parallel 4 2>&1 | cat >> build.log
-    fi;
-    echo "***** WARNINGS *****"
-    grep 'Warning\[' build.log | cat > warnings.log
-    grep 'Remark\[' build.log | cat >> warnings.log
-    cat warnings.log | sed ''/Warning/s//`printf "\033[36mWarning\033[0m"`/'' > warnings.log
-    cat warnings.log | sed ''/Remark/s//`printf "\033[31mRemark\033[0m"`/'' > warnings.log
-    echo "$(cat warnings.log)"
-    echo "***** ERRORS *****"
-    grep 'Error\[' build.log | cat > errors.log
-    cat errors.log | sed ''/Error/s//`printf "\033[34mError\033[0m"`/'' > errors.log
-    echo "$(cat errors.log)"
-
-    echo "***** SIZE *****"
-    grep 'of readonly' build.log
-    grep 'of readwrite' build.log
-
-    rm build.log
-    rm warnings.log
-    rm errors.log
-}
-
-function iarm() {
-    ARGC=$#
-    if [ $ARGC -eq 1 ]; then
-        IarBuild.exe $1 -make Debug -log all -parallel 4 2>&1 | tee build.log
-    else
-        echo "" | cat > build.log
-        IarBuild.exe $1 -make Debug -log all -parallel 4 2>&1 | cat >> build.log
-    fi;
-    echo "***** WARNINGS *****"
-    grep 'Warning\[' build.log | cat > warnings.log
-    grep 'Remark\[' build.log | cat >> warnings.log
-    cat warnings.log | sed ''/Warning/s//`printf "\033[36mWarning\033[0m"`/'' > warnings.log
-    cat warnings.log | sed ''/Remark/s//`printf "\033[31mRemark\033[0m"`/'' > warnings.log
-    echo "$(cat warnings.log)"
-    echo "***** ERRORS *****"
-    grep 'Error\[' build.log | cat > errors.log
-    cat errors.log | sed ''/Error/s//`printf "\033[34mError\033[0m"`/'' > errors.log
-    echo "$(cat errors.log)"
-
-    echo "***** SIZE *****"
-    grep 'of readonly' build.log
-    grep 'of readwrite' build.log
-
-    rm build.log
-    rm warnings.log
-    rm errors.log
-}
-
-function iarmf(){
-    echo "IAR EWARM Build Project and Flash (ST-Link CLI Utility)"
-    path=$1
-    printf "Project: %s\n" $1/*ewp
-    iarm $1/*.ewp q
-    printf "Executable: %s\n" $path/Debug/Exe/*.hex
-    ST-LINK_CLI.exe -c SWD -p $path/Debug/Exe/*.hex -V -Rst -HardRst
-}
-
-# add stuff to path for Doxygen call graphs
-export PATH=$PATH:/c/Program\ Files\ \(x86\)/Graphviz2.38/bin
-
-# add stuff to path for cppcheck
-export PATH=$PATH:~/apps/cppcheck
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -353,6 +213,92 @@ create-qr-codes() {
 	segno "$1; 20180301; SW-TEST" --output $1-invalid.png --scale=10 --light=yellow
 }
 
+# MAC VS WINDOWS SPLIT
+if [[ $OSTYPE == msys ]]; then    # Windows
+    alias fg='echo "Windows - alt tab to your gvim"'
+    # add stuff to path for Doxygen call graphs - WINDOWS ONLY
+    export PATH=$PATH:/c/Program\ Files\ \(x86\)/Graphviz2.38/bin
+else
+    # git bash completion - MAC ONLY
+    [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+fi
+
+#command prompt customization
+prompt() {
+    local last_status=$?
+
+    local WHITE="\[\033[1;37m\]"
+    local GREEN="\[\033[0;32m\]"
+    local CYAN="\[\033[0;36m\]"
+    local GRAY="\[\033[0;37m\]"
+    local BLUE="\[\033[0;34m\]"
+    local LIGHT_BLUE="\[\033[1;34m\]"
+    local YELLOW="\[\033[1;33m\]"
+    local RED="\[\033[1;31m\]"
+    local no_color='\[\033[0m\]'
+
+    local time="${YELLOW}\d \@$no_color"
+    local whoami="${GREEN}\u$no_color"
+    #local whoami="${GREEN}\u@\h$no_color"   This one has the computer name (alex@macbook)
+    local dir="${CYAN}\w$no_color"
+
+    local joblist
+    jobs=$(jobs)
+    for item in $jobs
+    do
+        str=$item
+        joblist=$joblist${str:0:3}" "
+    done
+    # each line of "jobs" output has 3 parts ("
+    # first 3 characters of each part of the job list (ex: "[1] Sto vim")
+    joblist=$BLUE$joblist
+
+    local branch
+    if git rev-parse --git-dir >/dev/null 2>/dev/null ; then
+        branch=$(git branch | awk '/^\*/ { print $2 }')
+        branch="${branch:+$LIGHT_BLUE$branch }"
+    else
+        unset branch
+    fi
+
+    local last_fail
+    if test $last_status -ne 0 ; then
+        last_fail="=> ${YELLOW}Err: $last_status${no_color}\n"
+    else
+        unset last_fail
+    fi
+
+    PS1="\n$time $whoami $branch$dir $joblist\n$last_fail$no_color\$ "
+}
+PROMPT_COMMAND=prompt
+# retain $PROMPT_DIRTRIM directory components when the prompt is too long
+PROMPT_DIRTRIM=3
+
 # call to bash_secrets to setup whatever environmental secrets you needed
 source ~/.bash_secrets
 export_secrets
+
+# source general git bash completion, downloaded with this command:
+# curl -o ~/bash_completion.d/git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+source ~/bash_completion.d/git
+
+## HRBV Result Commands
+alias mockHrbvViral="three9-mock com7 --isp --force_cqs '28, 30, 30, 22, 33, 26, 32, 34, 25, 27, 30, 30, 25, 28, 24, 25, 28, 24, 28, 25, 26, 24, 28, 24, 0, 0, 0'"
+alias mockHrbvBacterial="three9-mock com7 --isp --force_cqs '26, 31, 26, 23, 27, 26, 30, 30, 25, 25, 30, 28, 29, 28, 29, 24, 25, 24, 26, 24, 22, 30, 30, 26, 0, 0, 0'"
+alias mockHrbvNegative="three9-mock com7 --isp --force_cqs '26, 28, 23, 24, 29, 26, 30, 30, 25, 27, 29, 31, 36, 27, 30, 25, 29, 24, 29, 25, 24, 30, 29, 28, 0, 0, 0'"
+alias mockHrbvBothPositive="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 28, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive1="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 38, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive2="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 0, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive3="three9-mock com7 --isp --force_cqs '0, 0, 0, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 28, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInvalidUserAction1="three9-mock com7 --isp --fail 01001412345678 --fail_cycle 20"
+alias mockHrbvInvalidUserAction2="three9-mock com7 --isp --fail 0C001412345678 --fail_cycle 20"
+alias mockHrbvInvalidUserAction5="three9-mock com7 --isp --fail C3001412345678 --fail_cycle 20"
+
+## NVM
+# default to newest node (20.6.1)
+export PATH=$HOME/.nvm/versions/node/v20.6.1/bin:$PATH
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
