@@ -14,6 +14,7 @@ Plug 'tpope/vim-sensible'
 Plug 'scrooloose/nerdtree'
 
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 Plug 'sheerun/vim-polyglot'
 
