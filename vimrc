@@ -227,8 +227,8 @@ augroup coc_commands
     autocmd Filetype javascript,typescript,python,cs nmap <silent> gi <Plug>(coc-implementation)
     autocmd Filetype javascript,typescript,python,cs nmap <silent> gr <Plug>(coc-references)
 
-    autocmd Filetype javascript,typescript,python,cs nmap <silent> <C-u> <Plug>(coc-diagnostic-next)
-    autocmd Filetype javascript,typescript,python,cs nmap <silent> <S-u> <Plug>(coc-diagnostic-prev)
+    autocmd Filetype javascript,typescript,python,cs,json nmap <silent> <C-u> <Plug>(coc-diagnostic-next)
+    autocmd Filetype javascript,typescript,python,cs,json nmap <silent> <S-u> <Plug>(coc-diagnostic-prev)
     autocmd Filetype javascript,typescript,python nmap <silent> <Leader>rn <Plug>(coc-rename)
 
     autocmd Filetype javascript,typescript,python nmap <Leader>dc :call CocActionAsync('doHover')<CR>
