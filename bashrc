@@ -1,11 +1,7 @@
 # Settings for all shells
 
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
-
 #Environment variables
-export EDITOR=gvim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=less
 export CVS_RSH=ssh
@@ -53,11 +49,12 @@ alias info='open ~/Desktop/Me/info.rtf'
 alias biomeme='cd ~/githubcode/biomeme'
 alias gv='gvim &'
 alias dev='git checkout development;git fetch'
+alias read='bat README.md'
 v() {
     if [ -z "$1" ]; then
-        gvim &
+        nvim
     else
-        gvim "$1" &
+        nvim "$1"
     fi
 }
 
