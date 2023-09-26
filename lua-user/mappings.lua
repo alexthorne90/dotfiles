@@ -34,6 +34,13 @@ return {
     ["gT"] = { ":tabprevious<cr>", desc = "Previous tab", },
     -- tn for new tab
     ["tn"] = { ":tabnew<cr>", desc = "Previous tab", },
+    -- gb/B for moving tabs
+    ["gb"] = { 
+      function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" 
+    },
+    ["gB"] = { 
+      function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer",
+    },
     
     -- shift + r for redo
     ["<S-r>"] = { ":redo<cr>", desc = "Redo" },
@@ -46,6 +53,20 @@ return {
       function() require("telescope.builtin").find_files() end,
       desc = "Open telescope find files" 
     },
+
+    -- my old ctrl/shift+u for diagnostic jumping
+    ["<C-u>"] = { function() vim.diagnostic.goto_next() end, desc = "Next diagnostic" },
+    ["<S-u>"] = { function() vim.diagnostic.goto_prev() end, desc = "Next diagnostic" },
+
+    -- Space for fold toggle
+    ["<space>"] = { "za", desc = "Toggle fold at current cursor location"},
+
+    -- LSP
+    ["gi"] = { function() vim.lsp.buf.implementation() end, desc = "Go to implementation" },
+
+    -- Run tests with neotest
+		["<leader>tt"] = { function() require("neotest").run.run() end, desc = "Neotest run nearest" },
+		["<leader>tf"] = { function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Neotest run file" },
   },
   t = {
     -- setting a mapping to false will disable it

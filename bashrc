@@ -191,6 +191,7 @@ alias d='cd ~/githubcode/detector'
 alias h='cd ~/githubcode/heater'
 alias b='cd ~/githubcode/baseboard'
 alias pi='pipenv install --dev; pipenv shell'
+alias po='poetry install; poetry shell'
 
 clean-git() {
     git branch --merged | egrep -v "(^\*|master|development)" | xargs git branch -d
@@ -276,3 +277,28 @@ PROMPT_DIRTRIM=3
 # call to bash_secrets to setup whatever environmental secrets you needed
 source ~/.bash_secrets
 export_secrets
+
+# source general git bash completion, downloaded with this command:
+# curl -o ~/bash_completion.d/git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+source ~/bash_completion.d/git
+
+## HRBV Result Commands
+alias mockHrbvViral="three9-mock com7 --isp --force_cqs '28, 30, 30, 22, 33, 26, 32, 34, 25, 27, 30, 30, 25, 28, 24, 25, 28, 24, 28, 25, 26, 24, 28, 24, 0, 0, 0'"
+alias mockHrbvBacterial="three9-mock com7 --isp --force_cqs '26, 31, 26, 23, 27, 26, 30, 30, 25, 25, 30, 28, 29, 28, 29, 24, 25, 24, 26, 24, 22, 30, 30, 26, 0, 0, 0'"
+alias mockHrbvNegative="three9-mock com7 --isp --force_cqs '26, 28, 23, 24, 29, 26, 30, 30, 25, 27, 29, 31, 36, 27, 30, 25, 29, 24, 29, 25, 24, 30, 29, 28, 0, 0, 0'"
+alias mockHrbvBothPositive="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 28, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive1="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 38, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive2="three9-mock com7 --isp --force_cqs '28, 31, 26, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 0, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInconclusive3="three9-mock com7 --isp --force_cqs '0, 0, 0, 23, 28, 26, 27, 30, 24, 27, 31, 28, 28, 32, 27, 25, 28, 28, 27, 26, 25, 26, 30, 24, 0, 0, 0'"
+alias mockHrbvInvalidUserAction1="three9-mock com7 --isp --fail 01001412345678 --fail_cycle 20"
+alias mockHrbvInvalidUserAction2="three9-mock com7 --isp --fail 0C001412345678 --fail_cycle 20"
+alias mockHrbvInvalidUserAction5="three9-mock com7 --isp --fail C3001412345678 --fail_cycle 20"
+
+## NVM
+# default to newest node (20.6.1)
+export PATH=$HOME/.nvm/versions/node/v20.6.1/bin:$PATH
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"

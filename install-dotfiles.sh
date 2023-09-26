@@ -49,8 +49,10 @@ done
 echo "Linking .clang-format"
 ln -s "$dirname"/clang-format-alex-C ~/.clang-format
 
-# link .prettierrc and .eslintrc in HOME
+# link .prettierrc, .eslintrc, .pycodestyle in HOME
 echo "Linking .prettierrc"
 ln -s "$dirname"/prettierrc ~/.prettierrc
 echo "Linking .eslintrc"
 ln -s "$dirname"/eslintrc ~/.eslintrc
+echo "Linking .pycodestyle"
+ln -s "$dirname"/pycodestyle ~/.pycodestyle

@@ -8,8 +8,22 @@
   - New age vim fork that makes plugins, API, and LSP usage easier than standard vim
 - Astronvim : https://astronvim.com/
   - Pre-packaged Neovim configuration to get started quickly
+  - Languages highlighting and basic usage through treesitter : https://github.com/nvim-treesitter/nvim-treesitter
+    - `TSInstall c` to install the c languge treesitter extension
+  - Similarly, formatting and linting is done through null-ls : https://github.com/jose-elias-alvarez/null-ls.nvim
+    - `NullLsInstall autopep8` to install autopep8 for use
+  - All package management with Maxon : https://github.com/williamboman/mason.nvim
 - WIP
   - Super WIP here still, working on the user portion of the config to get this working.  Make sure to follow the linking install instructions below to link this repo's nvim configs into the astronvim user section
+- Setup
+  - A lot of things will install themselves when you first start nvim
+  - Run :checkhealth to get good diagnostics
+  - Python
+    - https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
+    - Basically you want to set up a virtual python env specifically for Neovim
+      - From the nvim root: `python -m venv ~/.virtualenvs/neovim311` 
+      - `python -m venv shell` -> `pip install pynvim neovim`
+      - And then set g:python3_host_prog in vim options to point at the python executable in the venv
 
 ### Bash
 
@@ -39,3 +53,16 @@
       * !!! this is the important step to get my custom configs into astronvim
   * I have not tried to script this yet, so for now you just have to link the files manually.
 * Secrets - the bashrc references a `.bash_secrets` file and calls its function `export_secrets`.  If you need to export environmental secrets to your shell, manually add this file and create the function with whatever exports you want (don't commit the `.bash_secrets` file)
+
+
+## Language Specific
+
+* Python
+  * When using the pyright LSP in project with a virtual environment, it will need a pyrightconfig.json file to point the language server at the environment.  It will look something like this:
+    ```
+    {
+        "venvPath": ".",
+        "venv": ".venv"
+    }
+    ```
+
