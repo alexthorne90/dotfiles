@@ -21,7 +21,7 @@
   - Python
     - https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
     - Basically you want to set up a virtual python env specifically for Neovim
-      - From the nvim root: `python -m venv ~/.virtualenvs/neovim311` 
+      - From the nvim root: `python -m venv ~/.virtualenvs/neovim311`
       - `python -m venv shell` -> `pip install pynvim neovim`
       - And then set g:python3_host_prog in vim options to point at the python executable in the venv
 
@@ -48,11 +48,14 @@
   * Enter command prompt (cmd.exe) as a admin
   * `mklink C:\Users\Alex\.bashrc C:\Users\Alex\githubcode\dotfiles\bashrc`
     * This is the windows command for sym link.  Notice that the order is backward
-    * Here's what I had to do for a directory to hold my custom astrovim lua config:  
+    * Here's what I had to do for a directory to hold my custom astrovim lua config:
       `mklink /D C:\Users\AlexThorne\AppData\Local\nvim\lua\user C:\Users\AlexThorne\githubcode\dotfiles\lua-user`
       * !!! this is the important step to get my custom configs into astronvim
   * I have not tried to script this yet, so for now you just have to link the files manually.
 * Secrets - the bashrc references a `.bash_secrets` file and calls its function `export_secrets`.  If you need to export environmental secrets to your shell, manually add this file and create the function with whatever exports you want (don't commit the `.bash_secrets` file)
+* Window Terminal
+  * The `settings.json` file in this repo is the windows terminal settings file.  To use this, copy it manually into the ridiculous path set up for windows terminal: `$LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\`
+  * TODO: add this into the install script
 
 
 ## Language Specific
