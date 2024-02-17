@@ -28,6 +28,7 @@ return {
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
+          "cs",   -- disabling for now, not sure we want csharpier
           -- "python",
         },
       },
@@ -44,7 +45,7 @@ return {
     servers = {
       "pyright",
       "clangd",
-      "omnisharp"
+      -- "omnisharp"
     },
   },
 
@@ -75,5 +76,13 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      pattern = {"*"},
+      callback = function(ev)
+        save_cursor = vim.fn.getpos(".")
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.setpos(".", save_cursor)
+      end,
+    })
   end,
 }
