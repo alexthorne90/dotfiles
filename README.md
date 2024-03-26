@@ -15,15 +15,12 @@
   - All package management with Maxon : https://github.com/williamboman/mason.nvim
 - WIP
   - Super WIP here still, working on the user portion of the config to get this working.  Make sure to follow the linking install instructions below to link this repo's nvim configs into the astronvim user section
+  - Using this guy's config as an example for a lot of my plugin files: https://github.com/kabinspace/AstroNvim_user/tree/master
 - Setup
   - A lot of things will install themselves when you first start nvim
   - Run :checkhealth to get good diagnostics
   - Python
-    - https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
-    - Basically you want to set up a virtual python env specifically for Neovim
-      - From the nvim root: `python -m venv ~/.virtualenvs/neovim311`
-      - `python -m venv shell` -> `pip install pynvim neovim`
-      - And then set g:python3_host_prog in vim options to point at the python executable in the venv
+    - set g:python3_host_prog to my standard python and pip install pynvim, pylint, etc
 
 ### Bash
 

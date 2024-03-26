@@ -42,11 +42,12 @@ return {
       -- end
     },
     -- enable servers that you already have installed without mason
-    servers = {
-      "pyright",
-      "clangd",
-      -- "omnisharp"
-    },
+    -- don't think I need these now that I've made the plugins/mason* stuff
+    -- servers = {
+    --   -- "pyright",
+    --   -- "clangd",
+    --   -- "omnisharp"
+    -- },
   },
 
   -- Configure require("lazy").setup() options
