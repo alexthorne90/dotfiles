@@ -2,15 +2,15 @@
 return {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin", -- remote to use
-    channel = "stable", -- "stable" or "nightly"
-    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
+    remote = "origin",     -- remote to use
+    channel = "stable",    -- "stable" or "nightly"
+    version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
     show_changelog = true, -- show the changelog after performing an update
   },
 
   -- Set colorscheme to use
-  colorscheme = "duskfox",
+  colorscheme = "catppuccin",
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
@@ -23,12 +23,12 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true, -- enable or disable format on save globally
+        enabled = true,     -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-          "cs",   -- disabling for now, not sure we want csharpier
+          "cs",              -- disabling for now, not sure we want csharpier
           -- "python",
         },
       },
@@ -78,7 +78,7 @@ return {
     --   },
     -- }
     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-      pattern = {"*"},
+      pattern = { "*" },
       callback = function(ev)
         save_cursor = vim.fn.getpos(".")
         vim.cmd([[%s/\s\+$//e]])
