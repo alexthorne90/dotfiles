@@ -12,9 +12,10 @@
     - `TSInstall c` to install the c languge treesitter extension
   - Similarly, formatting and linting is done through null-ls : https://github.com/jose-elias-alvarez/null-ls.nvim
     - `NullLsInstall autopep8` to install autopep8 for use
-  - All package management with Maxon : https://github.com/williamboman/mason.nvim
+  - All package management with Mason : https://github.com/williamboman/mason.nvim
 - WIP
   - Super WIP here still, working on the user portion of the config to get this working.  Make sure to follow the linking install instructions below to link this repo's nvim configs into the astronvim user section
+  - After astronvim installs, I am taking over the entire `lua` directory.  So follow the install instructions, then navigate to the install location (`~/AppData/Local/nvim`) and `rm -rf lua/`.  Then follow the linking instructions below to point this repos `lua-user/` directory to the nvim location.
   - Using this guy's config as an example for a lot of my plugin files: https://github.com/kabinspace/AstroNvim_user/tree/master
 - Setup
   - A lot of things will install themselves when you first start nvim
@@ -45,8 +46,8 @@
   * Enter command prompt (cmd.exe) as a admin
   * `mklink C:\Users\Alex\.bashrc C:\Users\Alex\githubcode\dotfiles\bashrc`
     * This is the windows command for sym link.  Notice that the order is backward
-    * Here's what I had to do for a directory to hold my custom astrovim lua config:
-      `mklink /D C:\Users\AlexThorne\AppData\Local\nvim\lua\user C:\Users\AlexThorne\githubcode\dotfiles\lua-user`
+    * Here's what I had to do for a directory to hold my custom astronvim lua config:
+      `mklink /D C:\Users\AlexThorne\AppData\Local\nvim\lua C:\Users\AlexThorne\githubcode\dotfiles\lua-user`
       * !!! this is the important step to get my custom configs into astronvim
   * I have not tried to script this yet, so for now you just have to link the files manually.
 * Secrets - the bashrc references a `.bash_secrets` file and calls its function `export_secrets`.  If you need to export environmental secrets to your shell, manually add this file and create the function with whatever exports you want (don't commit the `.bash_secrets` file)
