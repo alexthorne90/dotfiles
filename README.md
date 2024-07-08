@@ -6,7 +6,7 @@
 
 - Neovim : https://neovim.io/
   - New age vim fork that makes plugins, API, and LSP usage easier than standard vim
-- Astronvim : https://astronvim.com/
+- Astronvim (v4) : https://astronvim.com/
   - Pre-packaged Neovim configuration to get started quickly
   - Languages highlighting and basic usage through treesitter : https://github.com/nvim-treesitter/nvim-treesitter
     - `TSInstall c` to install the c languge treesitter extension
@@ -16,12 +16,10 @@
 - WIP
   - Super WIP here still, working on the user portion of the config to get this working.  Make sure to follow the linking install instructions below to link this repo's nvim configs into the astronvim user section
   - After astronvim installs, I am taking over the entire `lua` directory.  So follow the install instructions, then navigate to the install location (`~/AppData/Local/nvim`) and `rm -rf lua/`.  Then follow the linking instructions below to point this repos `lua-user/` directory to the nvim location.
-  - Using this guy's config as an example for a lot of my plugin files: https://github.com/kabinspace/AstroNvim_user/tree/master
+  - Trying to keep my config minimal and use the defaults + community packs (https://github.com/AstroNvim/astrocommunity)
 - Setup
   - A lot of things will install themselves when you first start nvim
   - Run :checkhealth to get good diagnostics
-  - Python
-    - set g:python3_host_prog to my standard python and pip install pynvim, pylint, etc
 
 ### Bash
 
@@ -59,11 +57,13 @@
 ## Language Specific
 
 * Python
-  * When using the pyright LSP in project with a virtual environment, it will need a pyrightconfig.json file to point the language server at the environment.  It will look something like this:
+  * (this doesn't seem true anymore) When using the pyright LSP in project with a virtual environment, it will need a pyrightconfig.json file to point the language server at the environment.  It will look something like this:
     ```
     {
         "venvPath": ".",
         "venv": ".venv"
     }
     ```
+  * I did need to set the `python3_host_prog` in my astrocore setup on my work machine, because my `python3` command did not work in my pyenv install.
+  If `python3` already works on your machine, this line might be unnecessary.
 
