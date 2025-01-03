@@ -87,28 +87,28 @@ return {
 					end,
 					desc = "Previous buffer",
 				},
-				-- ctrl+shift+direction to resize - don't seem to work work
-				["<C-S-h"] = {
-					function(win)
-						win:resize("width", -2)
+				-- shift+direction to resize (using "smart-splits" functions)
+				["<S-h>"] = {
+					function()
+						require("smart-splits").resize_left()
 					end,
-					desc = "Increase size left",
+					desc = "Resize split left",
 				},
-				["<C-S-l"] = {
-					function(win)
-						win:resize("width", 2)
+				["<S-l>"] = {
+					function()
+						require("smart-splits").resize_right()
 					end,
 					desc = "Increase size right",
 				},
-				["<C-S-j"] = {
-					function(win)
-						win:resize("height", -2)
+				["<S-j>"] = {
+					function()
+						require("smart-splits").resize_down()
 					end,
 					desc = "Increase size down",
 				},
-				["<C-S-k"] = {
-					function(win)
-						win:resize("height", 2)
+				["<S-k>"] = {
+					function()
+						require("smart-splits").resize_up()
 					end,
 					desc = "Increase size up",
 				},
