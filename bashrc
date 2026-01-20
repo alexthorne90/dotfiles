@@ -124,11 +124,12 @@ alias gg='rg'
 alias vi='gvim &'
 
 # Ceedling
-alias rta='rake clean test:all'
-alias rc='rake clean; rake clobber'
-alias rtd='rake test:delta'
-alias rr='rake release'
-alias cc='ceedling clean;ceedling'
+alias cc='ceedling clobber test'
+alias cr='ceedling clobber release'
+ct() {
+    echo "ceedling clobber test:$1"
+    ceedling clobber test:$1
+}
 
 # give me gcc colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
