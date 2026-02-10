@@ -6,7 +6,6 @@ export VISUAL=$EDITOR
 export PAGER=less
 export CVS_RSH=ssh
 export LESS="-RM"
-#export NODE_PATH=/usr/local/lib/node_modules
 
 # bash tab completion non-case-sensitive and show all options after a tab
 bind "set completion-ignore-case on"
@@ -118,17 +117,18 @@ alias gstash='git stash'
 gitshort gl log
 
 # installed 'ripgrep' and it's super dope, aliasing it because I'm used to gg
-alias gg='rg'
+alias gg='rg -i'
 
 # Vim
 alias vi='gvim &'
 
 # Ceedling
-alias rta='rake clean test:all'
-alias rc='rake clean; rake clobber'
-alias rtd='rake test:delta'
-alias rr='rake release'
-alias cc='ceedling clean;ceedling'
+alias cc='ceedling clobber test'
+alias cr='ceedling clobber release'
+ct() {
+    echo "ceedling clobber test:$1"
+    ceedling clobber test:$1
+}
 
 # give me gcc colors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
@@ -168,14 +168,13 @@ run_command_until_failure() {
 alias ports='python -m serial.tools.list_ports'
 serial() {
     local logfile=~/Documents/serial-logs/$1-$(date '+%F-%H:%M').log
-    echo "Logging $1@115200 to $logfile"
-    # winpty -Xallow-non-tty python -m serial.tools.miniterm $1 115200 -e --raw | tee "$logfile"
-    python -u -m serial.tools.miniterm $1 115200 -e --raw | tee "$logfile"
+    echo "Logging $1@2000000 to $logfile"
+    python -u -m serial.tools.miniterm $1 2000000 -e --raw | tee "$logfile"
 }
 serial_no_echo() {
     local logfile=~/Documents/serial-logs/$1-$(date '+%F-%H:%M').log
-    echo "Logging $1@115200 to $logfile"
-    winpty -Xallow-non-tty python -m serial.tools.miniterm $1 115200 --raw | tee $logfile
+    echo "Logging $1@2000000 to $logfile"
+    winpty -Xallow-non-tty python -m serial.tools.miniterm $1 2000000 --raw | tee $logfile
 }
 pull-phone-logs() {
   local infoLog=$1$(date '+%F-%H_%M')-info.log
@@ -190,8 +189,13 @@ alias tags='ctags -R --exclude=build --exclude=driver/build --exclude=common/bui
 alias d='cd ~/githubcode/detector'
 alias h='cd ~/githubcode/heater'
 alias b='cd ~/githubcode/baseboard'
+alias n='cd ~/githubcode/nextgen_motherboard_firmware'
+alias u='cd ~/githubcode/nextgen_ui_firmware'
 alias pi='pipenv install --dev; pipenv shell'
 alias po='poetry install; poetry shell'
+gcob() {
+    git checkout -b SW-$1_$2
+}
 
 clean-git() {
     git branch --merged | egrep -v "(^\*|master|development)" | xargs git branch -d
@@ -295,8 +299,7 @@ alias mockHrbvInvalidUserAction2="three9-mock com7 --isp --fail 0C001412345678 -
 alias mockHrbvInvalidUserAction5="three9-mock com7 --isp --fail C3001412345678 --fail_cycle 20"
 
 ## NVM
-# default to newest node (20.6.1)
-export PATH=$HOME/.nvm/versions/node/v20.6.1/bin:$PATH
+export PATH=$HOME/.nvm/versions/node/v22.6.0/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

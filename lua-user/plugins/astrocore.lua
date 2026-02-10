@@ -74,7 +74,7 @@ return {
 				["gT"] = { ":tabprevious<cr>", desc = "Previous tab" },
 				-- tn for new tab
 				["tn"] = { ":tabnew<cr>", desc = "Previous tab" },
-				-- gb/B for moving tabs
+				-- gb/B for moving buffers
 				["gb"] = {
 					function()
 						require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
@@ -87,30 +87,18 @@ return {
 					end,
 					desc = "Previous buffer",
 				},
-				-- ctrl+shift+direction to resize - don't seem to work work
-				["<C-S-h"] = {
-					function(win)
-						win:resize("width", -2)
+				-- shift+direction to resize using "smart-splits" functions (only doing sideways so I don't lose S-J normal functionality)
+				["<S-H>"] = {
+					function()
+						require("smart-splits").resize_left()
 					end,
-					desc = "Increase size left",
+					desc = "Resize split left",
 				},
-				["<C-S-l"] = {
-					function(win)
-						win:resize("width", 2)
+				["<S-L>"] = {
+					function()
+						require("smart-splits").resize_right()
 					end,
 					desc = "Increase size right",
-				},
-				["<C-S-j"] = {
-					function(win)
-						win:resize("height", -2)
-					end,
-					desc = "Increase size down",
-				},
-				["<C-S-k"] = {
-					function(win)
-						win:resize("height", 2)
-					end,
-					desc = "Increase size up",
 				},
 
 				-- shift + r for redo
@@ -121,10 +109,8 @@ return {
 
 				-- ctrl + p to open telescope find files
 				["<C-p>"] = {
-					function()
-						require("telescope.builtin").find_files()
-					end,
-					desc = "Open telescope find files",
+					':lua Snacks.picker.pick({source="files"})<cr>',
+					desc = "Open Snacks find files",
 				},
 
 				-- my old ctrl/shift+u for diagnostic jumping
