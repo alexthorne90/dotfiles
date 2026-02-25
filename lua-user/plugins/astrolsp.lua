@@ -11,7 +11,7 @@ return {
 		-- Configuration table of features provided by AstroLSP
 		features = {
 			autoformat = true,
-			codelens = true,     -- enable/disable codelens refresh on start
+			codelens = true, -- enable/disable codelens refresh on start
 			inlay_hints = false, -- enable/disable inlay hints on start
 			semantic_tokens = true, -- enable/disable semantic token highlighting
 		},
@@ -24,13 +24,12 @@ return {
 					-- "go",
 				},
 				ignore_filetypes = { -- disable format on save for specified filetypes
-					"cs",          -- disabling csharpier for now, not sure if we want it
+					-- "cs",
 				},
 			},
 			disabled = { -- disable formatting capabilities for the listed language servers
 				-- disable lua_ls formatting capability if you want to use StyLua to format your lua code
 				-- "lua_ls",
-				"cs",         -- disabling for now, not sure we want csharpier
 			},
 			timeout_ms = 5000, -- bumped up lsp timeout for python formatting
 			-- filter = function(client) -- fully override the default formatting function
@@ -97,7 +96,7 @@ return {
 					desc = "Toggle LSP semantic highlight (buffer)",
 					cond = function(client)
 						return client.supports_method("textDocument/semanticTokens/full")
-								and vim.lsp.semantic_tokens ~= nil
+							and vim.lsp.semantic_tokens ~= nil
 					end,
 				},
 			},
